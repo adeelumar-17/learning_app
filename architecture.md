@@ -1,6 +1,4 @@
 
----
-
 ```markdown
 # architecture.md
 **Last updated:** 2025-08-11
