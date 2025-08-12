@@ -1,63 +1,96 @@
-# requirements.md
-**Last updated:** 2025-08-11
-
-# Kids Storytelling PWA — Requirements (developer-focused)
-
-## Purpose & scope
-Short: a lightweight, offline-first Progressive Web App for children (4–10) to listen to stories (voice-only or voice+image), learn vocabulary and knowledge items, take simple assessments, and allow community-driven content (writers, narrators, illustrators, translators, reviewers). Works on low-capacity devices and in low/patchy connectivity environments; supports peer-to-peer content transfer and explicit, opt-in social storytelling.
-
-## Stakeholders
-- Kids (primary users)
-- Parents & caregivers (supervision, consent, analytics)
-- Teachers (optional classroom use)
-- Community contributors (writers, narrators, illustrators, translators, reviewers)
-- Admins / Moderators (content curation, feature control)
+# MVP Functional Requirements & User Stories  
+**Project:** Community-Driven Educational Storytelling PWA for Kids (Ages 4–10)  
+**Version:** MVP Scope  
+**Format:** User Stories
 
 ---
 
-## Functional requirements (core)
-1. **Story playback**
-   - Voice-only mode.
-   - Voice + image page mode (page-turn style).
-   - Play / Pause / Seek / Rewind.
-   - Word highlighting synchronized with audio timestamps (optional, for supported stories).
-   - Download stories for offline playback.
+## 1. Story Playback (Core Learning Experience)
 
-2. **Learning tracking**
-   - Extract and store vocabulary per story.
-   - Per-story knowledge cards (1–4 simple facts).
-   - Local progress store (which stories played, seconds listened, words learned).
+### User Stories
+- **As a child**, I want to listen to a small set of curated stories offline so that I can enjoy them without internet access.  
+- **As a child**, I want to see simple pictures while listening to a story so that I can better understand the story.  
+- **As a parent**, I want stories to be easy to start and replay so that my child can enjoy them without assistance.
 
-3. **Assessments**
-   - Simple interactive quizzes: matching (word↔image), multiple choice (1 correct), fill-in-the-blank (with hints).
-   - Store quiz attempts offline and sync when online.
-   - Gamified rewards (stars/badges) displayed locally.
-
-4. **Community content & workflows**
-   - Contributor roles: writer, narrator, illustrator, translator, reviewer, moderator.
-   - Content submission (story text + metadata), audio upload, SVG/graphics upload, translation files.
-   - Review/approval workflow with versioning and basic metadata (language, age range, tags).
-
-5. **Offline-first & sharing**
-   - PWA installable on mobile/desktop.
-   - Service Worker for caching app shell, assets, and selected stories.
-   - Peer-to-peer sharing (Bluetooth / WebRTC fallback) of story packages (manifest + media).
-   - Background sync for queued uploads and analytics.
-
-6. **Privacy & social features**
-   - Explicit opt-in consent for any real-child content; parental approval required.
-   - Admin-curated social stories gallery (opt-in only).
-   - Share buttons for published, consented content (share only sanitized/approved items).
+### MVP Functional Requirements
+- PWA-based audio player with play/pause/replay controls.
+- Support for 3–5 preloaded stories (voice-only + voice+picture).
+- Story images optimized as SVG or lightweight formats.
+- Works fully offline after initial install (Service Worker caching).
 
 ---
 
-## Non-functional requirements
-- **Performance:** App shell loads < 1.5s on 3rd-gen low-end devices; first story start < 3s when cached.
-- **Storage:** Default on-device downloads must be conservative (e.g., prefer low/medium audio quality); allow user to remove packs; handle storage quotas and eviction gracefully.
-- **Offline behavior:** Core features (playback for downloaded stories, quizzes, progress recording) must work fully offline.
-- **Accessibility:** WCAG AA baseline: large readable fonts, voice guidance, tappable controls, high-contrast theme option.
-- **Localization:** Support multilingual UI and content (RTL support where needed).
-- **Security & privacy:** TLS for all network calls; local encryption optional for sensitive items (consents); parental authentication for settings & sharing.
-- **Device compatibility:** Target low-memory Android devices (1–2 GB RAM) and modern browsers (Chromium-based mobile browsers + Firefox).
+## 2. Basic Learning Outcome Tracking
+
+### User Stories
+- **As a parent**, I want to see a short list of new words my child learned so that I can track their progress.  
+- **As a child**, I want to learn the meaning of new words so that I can improve my vocabulary.
+
+### MVP Functional Requirements
+- Each story tagged with 5–10 target vocabulary words.
+- Display vocabulary list with word, meaning, and simple illustration/icon.
+- Store learned words locally in IndexedDB for offline access.
 
 ---
+
+## 3. Simple Assessments
+
+### User Stories
+- **As a child**, I want a short quiz after a story so that I can check what I learned.  
+- **As a parent**, I want quizzes to be quick and easy so that my child stays engaged.
+
+### MVP Functional Requirements
+- One quiz per story (max 3–5 questions).
+- Question type: multiple choice or picture matching.
+- Offline support for quizzes and results.
+- Store quiz scores locally for later viewing.
+
+---
+
+## 4. Community Content (MVP Contributor Flow)
+
+### User Stories
+- **As a story narrator**, I want to submit an audio file so that children can hear the story in my voice.  
+- **As a content reviewer**, I want to approve or reject content so that only child-safe stories are published.
+
+### MVP Functional Requirements
+- Simple contributor upload form (web-based, no heavy editing tools).
+- Upload: audio (MP3) + cover image (SVG/PNG) + metadata.
+- Basic admin/reviewer dashboard for approval.
+- No P2P sharing yet — focus on central submission.
+
+---
+
+## 5. Offline-First & Low-Capacity Device Support
+
+### User Stories
+- **As a child**, I want the app to work without internet so that I can use it anywhere.  
+- **As a parent**, I want the app to use little storage so that it fits on older devices.
+
+### MVP Functional Requirements
+- Progressive Web App with app-shell caching.
+- Cache-first strategy for stories and assets.
+- Limit total package size to ≤50MB for MVP.
+- Lazy-load non-critical images and audio.
+
+---
+
+## 6. Ethical Storytelling (MVP Social Campaign)
+
+### User Stories
+- **As a parent**, I want to opt-in to sharing my child’s learning story so that others can see the impact of education.  
+- **As a campaign manager**, I want to showcase short learning milestones so that we can inspire the community.
+
+### MVP Functional Requirements
+- Opt-in consent form for parents.
+- Collect short text testimonials and milestone stats (no complex media uploads in MVP).
+- Admin-curated selection for posting on social media.
+
+---
+
+## 7. Out of Scope for MVP (Future Versions)
+- Peer-to-peer content sharing over Bluetooth.
+- Large content library (limit to 3–5 stories in MVP).
+- Multiple quiz formats and advanced gamification.
+- AI-generated summaries or speech-to-text retelling.
+- Full localization/multi-language UI.
